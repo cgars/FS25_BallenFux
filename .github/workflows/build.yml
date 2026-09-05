@@ -1,0 +1,53 @@
+name: Validate and build mod
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install validators
+        run: sudo apt-get update && sudo apt-get install -y lua5.1 libxml2-utils zip
+
+      - name: Validate modDesc XML
+        run: xmllint --noout modDesc.xml
+
+      - name: Validate Lua syntax
+        run: |
+          luac5.1 -p scripts/main.lua
+          luac5.1 -p scripts/NoBaleConsumables.lua
+
+      - name: Build installable ZIP
+        run: |
+          mkdir -p dist
+          zip -r dist/FS25_BallenFux.zip \
+            modDesc.xml \
+            icon_ballenFux.dds \
+            README_DE.txt \
+            scripts
+
+      - name: Verify ZIP structure
+        run: |
+          unzip -t dist/FS25_BallenFux.zip
+          test "$(unzip -Z1 dist/FS25_BallenFux.zip | head -n 1)" = "modDesc.xml"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FS25_BallenFux
+          path: dist/FS25_BallenFux.zip
+
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" dist/FS25_BallenFux.zip --generate-notes

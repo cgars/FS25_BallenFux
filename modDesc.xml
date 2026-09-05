@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="110">
+    <author>Christian Garbers</author>
+    <version>1.0.0.0</version>
+    <multiplayer supported="true"/>
+    <iconFilename>icon_ballenFux.dds</iconFilename>
+
+    <title>
+        <de>BallenFux - Kein Ballen-Verbrauch</de>
+        <en>BallenFux - No Bale Consumables</en>
+    </title>
+
+    <description>
+        <de><![CDATA[
+Deaktiviert den Verbrauch von Netz, Garn und Wickelfolie bei Ballenpressen und Wicklern.
+
+- Funktioniert mit Rund- und Quaderballenpressen
+- Funktioniert mit Ballenwicklern und Inline-Wicklern
+- Leere Maschinen können trotzdem weiterarbeiten
+- Kompatibel mit Helfern, Courseplay und AutoDrive
+- Keine Taste und keine Einstellung nötig: Ist der Mod aktiviert, ist der Verbrauch aus
+
+Optional können Netz, Garn oder Folie einmal geladen werden, um deren Ausführung bzw. Farbe auszuwählen. Sie werden danach nicht mehr verbraucht.
+        ]]></de>
+        <en><![CDATA[
+Disables the consumption of net wrap, twine and wrapping film in balers and bale wrappers.
+
+- Works with round and square balers
+- Works with bale wrappers and inline wrappers
+- Empty machines can continue working
+- Compatible with helpers, Courseplay and AutoDrive
+- No key or setting required: when the mod is enabled, consumption is disabled
+
+Net wrap, twine or film can optionally be loaded once to select a variation or color. It will not be consumed afterwards.
+        ]]></en>
+    </description>
+
+    <extraSourceFiles>
+        <sourceFile filename="scripts/main.lua"/>
+    </extraSourceFiles>
+</modDesc>
