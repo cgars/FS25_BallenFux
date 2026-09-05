@@ -57,7 +57,9 @@ The repository root is also the mod root: `modDesc.xml` must remain directly at
 the top level. GitHub Actions validates the XML and Lua files and builds the
 installable ZIP after every push and pull request.
 
-Creating a tag such as `v1.0.0.0` builds the ZIP and publishes a GitHub release.
+On `main`, the workflow reads the version from `modDesc.xml` and publishes the
+corresponding release if that version does not exist yet. A new release therefore
+requires a version bump in `modDesc.xml`.
 
 ## License
 
